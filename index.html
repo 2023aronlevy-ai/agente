@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultor Médico - IA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Contenedor principal del Chat -->
+  <main class="chat-container">
+    
+    <!-- Encabezado del Consultor Médico -->
+    <header class="chat-header">
+      <div class="avatar">🩺</div>
+      <div>
+        <h1>Consultor Médico</h1>
+        <p class="status"><span class="status-dot"></span> En línea para ayudarte</p>
+      </div>
+    </header>
+
+    <!-- Zona de chat: Mensajes y burbujas de conversación -->
+    <section class="zona-de-chat" id="zona-de-chat" aria-label="Zona de chat">
+      <!-- Mensaje de bienvenida inicial del agente -->
+      <div class="message message-bot">
+        <div class="message-content">
+          ¡Hola! 👋 Soy tu <strong>Consultor Médico</strong>. Puedo ayudarte con dudas sobre trámites, requisitos médicos o temas de salud específicos. ¿En qué te puedo asesorar hoy?
+        </div>
+      </div>
+    </section>
+
+    <!-- Zona de escritura: Área de entrada de texto y botón de envío -->
+    <section class="zona-de-escritura" id="zona-de-escritura" aria-label="Zona de escritura">
+      <form id="chat-form" class="input-form">
+        <textarea 
+          id="user-input" 
+          placeholder="Escribe tu consulta sobre trámites o temas médicos..." 
+          rows="1" 
+          required
+        ></textarea>
+        <button type="submit" id="send-btn" aria-label="Enviar mensaje">
+          <span>Enviar</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Carga de archivos de script -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
