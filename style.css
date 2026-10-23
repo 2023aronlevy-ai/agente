@@ -1,0 +1,231 @@
+/* Variables para colores divertidos y modernos */
+:root {
+  --bg-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --card-bg: #ffffff;
+  --primary-color: #ff5e7e;
+  --primary-hover: #e04867;
+  --secondary-color: #4a90e2;
+  --bot-bubble: #eef5ff;
+  --user-bubble: #ffebf0;
+  --text-color: #2c3e50;
+  --text-muted: #7f8c8d;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --border-radius: 20px;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+/* Estructura del contenedor del chat */
+.chat-container {
+  width: 100%;
+  max-width: 480px;
+  height: 90vh;
+  max-height: 700px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Encabezado */
+.chat-header {
+  background: var(--secondary-color);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-header .avatar {
+  font-size: 28px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-header h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.chat-header .status {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Respetando la estructura exacta del boceto: zona de chat */
+.zona-de-chat {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #f9fbfd;
+}
+
+/* Burbujas de mensajes */
+.message {
+  display: flex;
+  max-width: 80%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message-bot {
+  align-self: flex-start;
+}
+
+.message-user {
+  align-self: flex-end;
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-color);
+  word-break: break-word;
+}
+
+.message-bot .message-content {
+  background-color: var(--bot-bubble);
+  border-bottom-left-radius: 4px;
+  border: 1px solid #d0e3ff;
+}
+
+.message-user .message-content {
+  background-color: var(--user-bubble);
+  border-bottom-right-radius: 4px;
+  border: 1px solid #fcd2dc;
+}
+
+.message-error .message-content {
+  background-color: #ffe6e6;
+  border: 1px solid #ffb3b3;
+  color: #d9534f;
+}
+
+/* Indicador de carga */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 8px 12px;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  animation: bounce 1.3s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.15s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.3s; }
+
+/* Respetando la estructura exacta del boceto: zona de escritura */
+.zona-de-escritura {
+  padding: 15px;
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+}
+
+.input-form {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.zona-de-escritura textarea {
+  flex: 1;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+  max-height: 100px;
+}
+
+.zona-de-escritura textarea:focus {
+  border-color: var(--primary-color);
+}
+
+.zona-de-escritura button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  height: 42px;
+}
+
+.zona-de-escritura button:hover {
+  background-color: var(--primary-hover);
+}
+
+.zona-de-escritura button:disabled {
+  background-color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 480px) {
+  .chat-container {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
