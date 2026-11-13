@@ -4,7 +4,21 @@ const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 
 let isWaitingResponse = false;
-const TIMEOUT_MS = 15000; // Ampliado a 15s por si la IA del webhook tarda
+const TIMEOUT_MS = 15000;
+
+// Generar o recuperar el sessionId de la sesión actual
+function getSessionId() {
+  let sessionId = sessionStorage.getItem('chat_session_id');
+  if (!sessionId) {
+    sessionId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'sess_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
+    sessionStorage.setItem('chat_session_id', sessionId);
+  }
+  return sessionId;
+}
+
+const SESSION_ID = getSessionId();
 
 // Ajuste automático de altura del textarea
 userInput.addEventListener('input', () => {
@@ -32,7 +46,10 @@ chatForm.addEventListener('submit', async (e) => {
     const response = await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text }),
+      body: JSON.stringify({ 
+        sessionId: SESSION_ID,
+        message: text 
+      }),
       signal: controller.signal
     });
 
@@ -40,7 +57,6 @@ chatForm.addEventListener('submit', async (e) => {
 
     if (!response.ok) throw new Error('Error al conectar con el servidor.');
 
-    // Soporta tanto respuestas en JSON como texto plano del webhook
     const rawText = await response.text();
     let botReply = rawText;
 
